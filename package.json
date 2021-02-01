@@ -1,0 +1,23 @@
+{
+  "name": "movie-tv-list",
+  "version": "1.0.0",
+  "description": "MyAnimeList but for movies and tv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aboudehhub/movie-tv-list.git"
+  },
+  "keywords": [
+    "movie",
+    "tv"
+  ],
+  "author": "aboude",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aboudehhub/movie-tv-list/issues"
+  },
+  "homepage": "https://github.com/aboudehhub/movie-tv-list#readme"
+}
