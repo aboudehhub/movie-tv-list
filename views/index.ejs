@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="preconnect" href="//fonts.gstatic.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//fonts.googleapis.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//www.googletagservices.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//www.googletagmanager.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//apis.google.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//pixel-sync.sitescout.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//pixel.tapad.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//c.deployads.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//tpc.googlesyndication.com/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//googleads.g.doubleclick.net/" crossorigin="anonymous" />
+    <link rel="preconnect" href="//securepubads.g.doubleclick.net/" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>aboude Movie Tv list List</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+
+<body class="ownlist anime" data-owner="1">
+    <div class="header">
+        <a href="/" class="header-title"></a>
+    </div>
+    <div id="list-container" class="list-container">
+        <div id="status-menu" class="status-menu-container">
+            <div class="status-menu"><a href="" class="status-button all_anime on">All Media</a><a href=""
+                    class="status-button watching ">Currently Watching</a><a href=""
+                    class="status-button completed ">Completed</a><a href="" class="status-button onhold ">On
+                    Hold</a><a href="" class="status-button dropped ">Dropped</a><a href=""
+                    class="status-button plantowatch ">Plan
+                    to Watch</a>
+                <a href="#" class="status-button add-media">add media</a>
+            </div>
+        </div>
+        <div class="list-block">
+            <div class="list-unit all_anime">
+                <div class="list-status-title">
+                    <span class="text">ALL MEDIA</span>
+                    <span class="stats">
+                        <a href="javascript: void(0);" id="show-stats-button"><i class="fa fa-bar-chart"></i> Stats</a>
+                        <a href="javascript: void(0);" id="advanced-options-button"><i class="fa fa-filter"></i>
+                            Filters</a>
+                    </span>
+                </div>
+                <table class="list-table">
+                    <tbody>
+                        <tr class="list-table-header">
+                            <th class="header-title status"></th>
+                            <th class="header-title image"><a class="link hover_info">Image</a></th>
+                            <th class="header-title title"><a href="" class="link sort">
+                                    Media Title
+                                </a></th>
+                            <th class="header-title score"><a href="" class="link sort">
+                                    Score
+                                </a></th>
+                            <th class="header-title type"><a href="" class="link sort">
+                                    Type
+                                </a></th>
+                            <th class="header-title progress"><a href="" class="link sort">
+                                    Progress
+                                </a></th>
+                            <th class="header-title tags">
+                                Tags
+                            </th>
+                            <th class="header-title started">Premiered</th>
+                            <th class="header-title studio">Studios</th>
+                        </tr>
+                    </tbody>
+                    <%for (let i = 1; i <= Object.keys(data).length; i++) {%>
+                        <tbody class="list-item" style="display: none;">
+                            <tr class="list-table-data">
+                                <td class="data status"></td>
+                        
+                                <td class="data image">
+                                    <a class="link sort">
+                                        <img src=<%= "https://image.tmdb.org/t/p/w500" + data[i].img %> class="hover-info image">
+                                    </a>
+                                </td>
+                                <td class="data title clearfix">
+                                    <%= data[i].title %>
+                                    <div class="add-edit-more">
+                                        <span class="more">
+                                            <a href="#">Edit</a>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="data score">
+                                    <a href="#" class="link">
+                                        <span class="score-label">
+                                            <%= data[i].rating %>
+                                        </span>
+                                    </a>
+                                </td>
+                                <td class="data type">
+                                    <span class="watching"><%= data[i].type %></span>
+                                </td>
+                                <td class="data progress" style="margin: 0;">
+                                    <div>
+                                        <span>
+                                            <a href="#" class="link">
+                                                <%= data[i].ep_soFar %></a>
+                                            <transition name="edit" style="display: none;">
+                                                <input type="text" style="width:30px;">
+                                            </transition>
+                                            /
+                                        </span>
+                                        <span><%= data[i].ep_total %></span>
+                                        <a href="#" class="icon-add-episode">
+                                            +
+                                        </a>
+                                    </div>
+                                </td>
+                                <td class="data season">
+                                    <span style="color: white;"><%= data[i].year %></span>
+                                </td>
+                                <td class="data studio">
+                                    <span><%= data[i].release_date + data[i].year %></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    <% } %>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
