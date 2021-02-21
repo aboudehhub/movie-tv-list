@@ -13,15 +13,14 @@
     <link rel="preconnect" href="//tpc.googlesyndication.com/" crossorigin="anonymous" />
     <link rel="preconnect" href="//googleads.g.doubleclick.net/" crossorigin="anonymous" />
     <link rel="preconnect" href="//securepubads.g.doubleclick.net/" crossorigin="anonymous" />
+    <script src="https://use.fontawesome.com/1c78e32294.js"></script>
     <link rel="stylesheet" href="./css/styles.css">
     <title>aboude Movie Tv list List</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 </head>
 
 <body class="ownlist anime" data-owner="1">
-    <div class="header">
-        <a href="/" class="header-title"></a>
-    </div>
+    <%- include('./header'); %>
     <div id="list-container" class="list-container">
         <div id="status-menu" class="status-menu-container">
             <div class="status-menu"><a href="" class="status-button all_anime on">All Media</a><a href=""
@@ -30,18 +29,13 @@
                     Hold</a><a href="" class="status-button dropped ">Dropped</a><a href=""
                     class="status-button plantowatch ">Plan
                     to Watch</a>
-                <a href="#" class="status-button add-media">add media</a>
+                <a href="/addMedia" class="status-button add-media">add media</a>
             </div>
         </div>
         <div class="list-block">
             <div class="list-unit all_anime">
                 <div class="list-status-title">
                     <span class="text">ALL MEDIA</span>
-                    <span class="stats">
-                        <a href="javascript: void(0);" id="show-stats-button"><i class="fa fa-bar-chart"></i> Stats</a>
-                        <a href="javascript: void(0);" id="advanced-options-button"><i class="fa fa-filter"></i>
-                            Filters</a>
-                    </span>
                 </div>
                 <table class="list-table">
                     <tbody>
@@ -67,7 +61,7 @@
                             <th class="header-title studio">Studios</th>
                         </tr>
                     </tbody>
-                    <%for (let i = 1; i <= Object.keys(data).length; i++) {%>
+                    <%for (let i = 0; i < Object.keys(data).length; i++) {%>
                         <tbody class="list-item" style="display: none;">
                             <tr class="list-table-data">
                                 <td class="data status"></td>
@@ -77,7 +71,7 @@
                                         <img src=<%= "https://image.tmdb.org/t/p/w500" + data[i].img %> class="hover-info image">
                                     </a>
                                 </td>
-                                <td class="data title clearfix">
+                                <td class="data title clearfix" style="text-transform: capitalize;">
                                     <%= data[i].title %>
                                     <div class="add-edit-more">
                                         <span class="more">
@@ -93,13 +87,13 @@
                                     </a>
                                 </td>
                                 <td class="data type">
-                                    <span class="watching"><%= data[i].type %></span>
+                                    <span class="watching" style="text-transform: uppercase;"><%= data[i].type %></span>
                                 </td>
                                 <td class="data progress" style="margin: 0;">
                                     <div>
                                         <span>
                                             <a href="#" class="link">
-                                                <%= data[i].ep_soFar %></a>
+                                                <%= data[i].ep_watched %></a>
                                             <transition name="edit" style="display: none;">
                                                 <input type="text" style="width:30px;">
                                             </transition>
@@ -115,7 +109,7 @@
                                     <span style="color: white;"><%= data[i].year %></span>
                                 </td>
                                 <td class="data studio">
-                                    <span><%= data[i].release_date + data[i].year %></span>
+                                    <span style="font-size: 12px;"><%= data[i].release_date + data[i].year %></span>
                                 </td>
                             </tr>
                         </tbody>

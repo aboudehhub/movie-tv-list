@@ -91,42 +91,6 @@ a {
   border: none !important;
 }
 
-#advanced-options .advanced-options-header .description,
-#fancybox-outer > .fancy-bg,
-#header-menu-button,
-#header-menu-dropdown a .text,
-#header-menu-dropdown svg,
-.data.status,
-.icon-watch,
-.list-menu-float .icon-menu svg,
-.list-menu-float > *,
-.list-table-header .header-title.image,
-[data-owner='1'] .btn-menu,
-[style*='block'] ~ div .btn-menu,
-[style*='block'] ~ div .header-info {
-  display: none !important;
-}
-
-#advanced-options #fancybox-close,
-#advanced-options .advanced-options-button a,
-#header-menu-dropdown a,
-#header-menu-dropdown a:after,
-.add-edit-more,
-.btn-menu a,
-.data.title .link,
-.header-info a,
-.list-item a,
-.list-menu-float:after,
-.list-menu-float:before,
-.list-table .list-table-header .header-title .link.sort {
-  -webkit-transition: all 0.1s ease-in-out 0s;
-  -khtml-transition: all 0.1s ease-in-out 0s;
-  -moz-transition: all 0.1s ease-in-out 0s;
-  -ms-transition: all 0.1s ease-in-out 0s;
-  -o-transition: all 0.1s ease-in-out 0s;
-  transition: all 0.1s ease-in-out 0s;
-}
-
 .data:not(.title),
 .list-table-data:after,
 .more-info[style*='tab'] {
@@ -1237,11 +1201,6 @@ a {
   .list-menu-float {
     right: 10px;
     margin: 0;
-  }
-
-  #fancybox-wrap {
-    left: 10px !important;
-    margin-left: 0 !important;
   }
 }
 

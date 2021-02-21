@@ -1,0 +1,12 @@
+db.media.insert({
+... title: 'Wolf of wallstreet',
+... type: 'movie',
+... rating: 8,
+... img: '/sOxr33wnRuKazR9ClHek73T8qnK.jpg',
+... status: 'watching',
+... ep_watched: 1,
+... ep_total: 1,
+... release_date: new Date(2013-5-30),
+... start_date: new Date(2020-5-30),
+... finish_date: new Date(2021-5-30),
+... times_rewatched: 0})

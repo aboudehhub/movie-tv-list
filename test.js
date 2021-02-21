@@ -1,8 +1,1 @@
-const { compile } = require('ejs');
-const fs = require('fs');
-function readJSON(path){
-    return JSON.parse(fs.readFileSync(path));
-}
-const a = readJSON('./data.json')
-
-console.log(a);
+await fetch("https://api.themoviedb.org/3/search/movie?api_key=f0649916d953886dc034b0301ce8bb18&query=wolf+of+wallstreet");

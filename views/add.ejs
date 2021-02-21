@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/1c78e32294.js"></script>
+    <link rel="stylesheet" href="./css/addmedia.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Add media</title>
+</head>
+<body>
+    <%- include('./header'); %>
+    <div class="wrap">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+        <div class="suggestions">
+            <div class="table-s">
+                <table>
+                    <tr>
+                        <th>Movie Suggestions</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://image.tmdb.org/t/p/w500/sOxr33wnRuKazR9ClHek73T8qnK.jpg">
+                            <div class="info">
+                                <span class="title">The Wolf of Wall street</span>
+                                <span class="releasedate">2013-12-23</span>
+                                <span class="voteavg">8</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-s">
+                <table>
+                    <tr>
+                        <th>Tv Suggestions</th>
+                    </tr>
+                    <tr>
+                        <td>AAAA</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch("https://api.themoviedb.org/3/search/movie?api_key=f0649916d953886dc034b0301ce8bb18&query=wolf+of+wall+street").then(response => response.json()).then(data => console.log(data.results));
+    </script>
+</body>
+</html>
