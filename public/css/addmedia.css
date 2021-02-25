@@ -75,9 +75,11 @@ th {
   width: 100%;
 }
 td {
+  border-top: 1px solid #16151c;
   margin: 0;
   background-color: #1e1c25;
   display: flex;
+  transition: 100ms ease-in-out;
 }
 img{
   width: calc(2 * 40px);
@@ -103,4 +105,26 @@ span{
 .voteavg::before{
   content: "Vote average: ";
   color: #6d368f;  
+}
+.add{
+  float: right;
+  background-color: #723f8c;
+  color: #b4b4b4;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  height: 20%;
+  border-bottom: 3px solid #b4b4b4;
+  margin-left: 200px;
+  margin-top: 45px;
+}
+.add:hover{
+  cursor: pointer;
+}
+.add:active{
+  margin-top: 48px;
+  border: none;
+}
+td:hover{
+  transform: scale(1.03);
 }

@@ -20,14 +20,14 @@ const Schema  = mongoose.Schema;
 const mediaSchema = new Schema({
     title:  String, 
     type: String,
-    rating: Number,
+    rating: String,
     img: String,
     status: String,
     ep_watched: Number,
     ep_total: Number,
-    release_date: { type: Date },
-    start_date: { type: Date, default: Date.now, required: false },
-    finish_date: { type: Date, required: false},
+    release_date: String,
+    start_date: { type: String, required: false },
+    finish_date: { type: String, required: false},
     times_rewatched: { type: Number, default: 0 },
     notes: {type: String, default: "none"}
 });
@@ -35,7 +35,7 @@ const Media = mongoose.model('Media', mediaSchema);
 
 // connect to db and start localhost
 mongoose.connect('mongodb://localhost:27017/motvlist', {useNewUrlParser: true, useUnifiedTopology: true}).then(
-    (result) => app.listen(PORT, (result) => console.log(`we on bois at http://${ip}:${PORT}/`))
+    result => app.listen(PORT, (result) => console.log(`we on bois at http://${ip}:${PORT}/`))
 );
 
 // app.
@@ -50,5 +50,44 @@ app.get('/', (req, res) => {
 });
 
 app.get('/addMedia', (req, res) => {
-    res.render('add')
+    res.render('add');
+});
+
+app.post('/addm', (req, res) => {
+    var m = req.body;
+    var utc = new Date().toJSON().slice(0,10);
+    const media = new Media({
+        title: m.title,
+        type: "movie",
+        rating: "-",
+        img: m.poster_path,
+        status: "watching",
+        ep_watched: 0,
+        ep_total: 1,
+        release_date: m.release_date,
+        start_date: utc,
+        finish_date: utc,
+        times_rewatched: 0,
+        notes: "none"
+    });
+    media.save();
+});
+app.post('/addt', (req, res) => {
+    var m = req.body;
+    var utc = new Date().toJSON().slice(0,10);    
+    const media = new Media({
+        title: m.name,
+        type: "tv",
+        rating: "-",
+        img: m.poster_path,
+        status: "watching",
+        ep_watched: 0,
+        ep_total: 1,
+        release_date: m.first_air_date,
+        start_date: utc,
+        finish_date: utc,
+        times_rewatched: 0,
+        notes: "none"
+    });
+    media.save();
 });
