@@ -80,6 +80,12 @@ td {
   background-color: #1e1c25;
   display: flex;
   transition: 100ms ease-in-out;
+  cursor: pointer;
+}
+a{
+  display: flex;
+  cursor: pointer;  
+  width: 100%;
 }
 img{
   width: calc(2 * 40px);

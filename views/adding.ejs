@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://use.fontawesome.com/1c78e32294.js"></script>
+        <script src="./javascript/jquery-3.5.1.js"></script>
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/addingcss.css">
+        <title>Add media</title>
+    </head>
+    <body>
+        <%- include('./header'); %>
+        <h1><%= media.name %></h1>
+
+        <table class="list-table">
+            <%for (let i=0; i < Object.keys(media.seasons).length; i++) {%>
+                <tbody class="list-item" style="display: none;">
+                    <tr class="list-table-data">
+                        <td class="data status"></td>
+            
+                        <td class="data image">
+                            <a class="link sort">
+                                <img src=<%="https://image.tmdb.org/t/p/w500" + media.seasons[i].poster_path %> class="hover-info image">
+                            </a>
+                        </td>
+                        <td class="data title clearfix" style="text-transform: capitalize;">
+                            <%= media.name %>
+                                <div class="add-edit-more">
+                                    <span class="more">
+                                        <a href="#">Edit</a>
+                                    </span>
+                                </div>
+                        </td>
+                        <td class="data score">
+                            <a href="#" class="link">
+                                <span class="score-label">
+                                    <%= media.seasons[i].season_number %>
+                                </span>
+                            </a>
+                        </td>
+                        <td class="data type">
+                            <span class="watching" style="text-transform: uppercase;">
+                                <%= "A" %>
+                            </span>
+                        </td>
+                        <td class="data progress" style="margin: 0;">
+                            <div>
+                                <span>
+                                    <%= media.seasons[i].episode_count %>
+                                </span>
+                                <a href="#" class="icon-add-episode">
+                                    +
+                                </a>
+                            </div>
+                        </td>
+                        <td class="data season">
+                            <span style="color: white;">
+                                <%= media.seasons[i].air_date %>
+                            </span>
+                        </td>
+                        <td class="data studio">
+                            <span style="font-size: 12px;">
+                                <%= media.seasons[i].air_date %>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+                <% } %>
+        </table>
+    </body>
+</html>

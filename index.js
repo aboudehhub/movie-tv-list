@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const os = require('os');
 const mongoose = require('mongoose');
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 // express vars
@@ -20,16 +21,20 @@ const Schema  = mongoose.Schema;
 const mediaSchema = new Schema({
     title:  String, 
     type: String,
+    show_status: { type: String, required: false },
     rating: String,
     img: String,
     status: String,
     ep_watched: Number,
     ep_total: Number,
     release_date: String,
+    last_air_date: { type: String, required: false },
     start_date: { type: String, required: false },
     finish_date: { type: String, required: false},
     times_rewatched: { type: Number, default: 0 },
-    notes: {type: String, default: "none"}
+    ep_runtime: Number,
+    genres: String,
+    tagline: {type: String, default: "none"}
 });
 const Media = mongoose.model('Media', mediaSchema);
 
@@ -51,6 +56,11 @@ app.get('/', (req, res) => {
 
 app.get('/addMedia', (req, res) => {
     res.render('add');
+});
+
+app.get('/:id', (req, res) => {
+    fetch(`https://api.themoviedb.org/3/tv/${req.params.id}?api_key=${apiKey}`).then(result => result.json()).then(json => console.log(typeof(json)));
+    fetch(`https://api.themoviedb.org/3/tv/${req.params.id}?api_key=${apiKey}`).then(result => result.json()).then(json => res.render('adding', {media: json}));
 });
 
 app.post('/addm', (req, res) => {

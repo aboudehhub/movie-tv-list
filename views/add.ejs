@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://use.fontawesome.com/1c78e32294.js"></script>
-    <link rel="stylesheet" href="./css/addmedia.css">
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="./javascript/jquery-3.5.1.js"></script>
-    <title>Add media</title>
-</head>
-<body>
-    <%- include('./header'); %>
-    <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="What are you looking for?">
-            <button type="submit" class="searchButton">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-        <div class="suggestions">
-            <div class="table-s">
-                <table class="movie">
-                    <thead>
-                        <tr>
-                            <th>Movie Suggestions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        </tr>
-                    </tbody>
-                </table>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://use.fontawesome.com/1c78e32294.js"></script>
+        <link rel="stylesheet" href="./css/addmedia.css">
+        <link rel="stylesheet" href="./css/styles.css">
+        <script src="./javascript/jquery-3.5.1.js"></script>
+        <title>Add media</title>
+    </head>
+    <body>
+        <%- include('./header'); %>
+        <div class="wrap">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
-            <div class="table-s">
-                <table class="tv">
-                    <thead>
-                        <tr>
-                            <th>Tv Suggestions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+            <div class="suggestions">
+                <div class="table-s">
+                    <table class="movie">
+                        <thead>
+                            <tr>
+                                <th>Movie Suggestions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-s">
+                    <table class="tv">
+                        <thead>
+                            <tr>
+                                <th>Tv Suggestions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
 
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="./javascript/addMedia.js"></script>
-</body>
+        <script src="./javascript/addMedia.js"></script>
+    </body>
 </html>

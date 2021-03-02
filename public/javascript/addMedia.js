@@ -8,13 +8,14 @@ function addToTable(){
         results.forEach((element, index) => {
             $('.movie > tbody > tr').append(`
                 <td>
-                    <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
-                    <div class="info">
-                        <span class="title">${element.title}</span>
-                        <span class="releasedate">${element.release_date}</span>
-                        <span class="voteavg">${element.vote_average}</span>
-                    </div>
-                    <button class="add" onclick="add('${element.title}', 'movie')">add</button>
+                    <a href="${element.id}">
+                        <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
+                        <div class="info">
+                            <span class="title">${element.title}</span>
+                            <span class="releasedate">${element.release_date}</span>
+                            <span class="voteavg">${element.vote_average}</span>
+                        </div>
+                    </a>
                 </td>
             `)
         });
@@ -23,15 +24,16 @@ function addToTable(){
         let results = data.results;
         results.forEach((element, index) => {
             $('.tv > tbody > tr').append(`
-                <td>
-                    <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
-                    <div class="info">
-                        <span class="title">${element.name}</span>
-                        <span class="releasedate">${element.first_air_date}</span>
-                        <span class="voteavg">${element.vote_average}</span>
-                    </div>
-                    <button class="add" onclick="add('${element.name}', 'tv')">add</button>
-                </td>
+                    <td>
+                        <a href="${element.id}">
+                            <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
+                            <div class="info">
+                                <span class="title">${element.name}</span>
+                                <span class="releasedate">${element.first_air_date}</span>
+                                <span class="voteavg">${element.vote_average}</span>
+                            </div>
+                        </a>
+                    </td>
             `)
         });
     });

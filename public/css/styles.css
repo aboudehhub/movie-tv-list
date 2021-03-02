@@ -1,6 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:400,500,700';
-@import 'https://malscraper.azurewebsites.net/covers/auto/presets/dataimagelink';
-
+*{
+  font-display: optional;
+}
 html {
   height: 100%;
 }
@@ -13,7 +14,7 @@ html {
 
 body {
   margin: 0;
-  position: relative;
+
   background: #16151c none center center/cover;
   background-color: #16151c !important;
   background-attachment: fixed !important;
