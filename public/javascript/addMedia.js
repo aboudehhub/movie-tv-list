@@ -49,5 +49,5 @@ function addmovie(id){
                 body: JSON.stringify(data)
         }
         fetch('/addm', option)
-    });
+    }).then(() => document.location.replace('/'));
 }

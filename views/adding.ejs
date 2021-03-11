@@ -84,7 +84,7 @@
                                 body: JSON.stringify(rdata)
                             }
                             fetch('/addt', option)
-                        });
+                        }).then(() => document.location.replace('/'));
                     }
                 </script>
         </table>
