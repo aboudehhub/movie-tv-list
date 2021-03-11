@@ -5,18 +5,15 @@ const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-// express vars
+// express lets
 const app = express();
 const networkInterface = os.networkInterfaces();
 const ip = networkInterface['Wi-Fi'][1].address;
 const PORT = process.env.PORT || 3000;
 
-// api vars
-const img = "https://image.tmdb.org/t/p/w500/";
 const apiKey = process.env.API_KEY;
-const api = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
 
-// mongo vars
+// mongo lets
 const Schema  = mongoose.Schema;
 const mediaSchema = new Schema({
     title:  String, 
@@ -33,7 +30,7 @@ const mediaSchema = new Schema({
     finish_date: { type: String, required: false},
     times_rewatched: { type: Number, default: 0 },
     ep_runtime: Number,
-    genres: String,
+    genres: { type: String, required: false},
     tagline: {type: String, default: "none"}
 });
 const Media = mongoose.model('Media', mediaSchema);
@@ -51,24 +48,26 @@ app.use(express.json());
 
 // render
 app.get('/', (req, res) => {
-    Media.find().then((result) => res.render('index', {data: result}));
+    const sortParam = req.query.sort ? req.query.sort : 'name';
+    const condition = req.query.cond ? {status: req.query.cond} : {};
+    Media.find(condition).sort(sortParam).then((result) => res.render('index', {data: result}));
 });
 
 app.get('/addMedia', (req, res) => {
     res.render('add');
 });
 
-app.get('/:id', (req, res) => {
-    fetch(`https://api.themoviedb.org/3/tv/${req.params.id}?api_key=${apiKey}`).then(result => result.json()).then(json => console.log(typeof(json)));
+app.get('/tv/:id', (req, res) => {
     fetch(`https://api.themoviedb.org/3/tv/${req.params.id}?api_key=${apiKey}`).then(result => result.json()).then(json => res.render('adding', {media: json}));
 });
 
 app.post('/addm', (req, res) => {
-    var m = req.body;
-    var utc = new Date().toJSON().slice(0,10);
+    let m = req.body;
+    let utc = new Date().toJSON().slice(0,10);
     const media = new Media({
-        title: m.title,
+        title:  m.title, 
         type: "movie",
+        show_status: m.status,
         rating: "-",
         img: m.poster_path,
         status: "watching",
@@ -76,28 +75,53 @@ app.post('/addm', (req, res) => {
         ep_total: 1,
         release_date: m.release_date,
         start_date: utc,
-        finish_date: utc,
+        finish_date: "-",
         times_rewatched: 0,
-        notes: "none"
+        ep_runtime: m.runtime,
+        tagline: m.tagline
     });
     media.save();
 });
 app.post('/addt', (req, res) => {
-    var m = req.body;
-    var utc = new Date().toJSON().slice(0,10);    
+    let m = req.body;
+    let utc = new Date().toJSON().slice(0,10);    
     const media = new Media({
-        title: m.name,
+        title:  m.name, 
         type: "tv",
+        show_status: m.status,
         rating: "-",
         img: m.poster_path,
         status: "watching",
         ep_watched: 0,
-        ep_total: 1,
-        release_date: m.first_air_date,
+        ep_total: m.episode_count,
+        release_date: m.air_date,
+        last_air_date: m.last_air_date,
         start_date: utc,
-        finish_date: utc,
         times_rewatched: 0,
-        notes: "none"
+        ep_runtime: m.episode_run_time,
+        tagline: m.tagline
     });
     media.save();
+});
+
+app.post('/addep', (req, res) => {
+    let m = req.body;
+    Media.find().then(result => {
+        let media = result[m.indx];
+        media.ep_watched += 1;
+        if(media.ep_watched + 1 === media.ep_total){
+            media.status = "completed";
+            media.finish_date = new Date().toJSON().slice(0,10);
+        }
+        media.save();
+    });
+});
+
+app.post('/chrate', (req, res) => {
+    let m = req.body;
+    Media.find().then(result => {
+        let media = result[m.indx];
+        media.rating = m.rating;
+        media.save();
+    });
 });

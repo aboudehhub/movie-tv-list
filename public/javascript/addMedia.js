@@ -8,8 +8,8 @@ function addToTable(){
         results.forEach((element, index) => {
             $('.movie > tbody > tr').append(`
                 <td>
-                    <a href="${element.id}">
-                        <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
+                    <a href='#' onclick=addmovie(${element.id})>
+                        <img src="${element.poster_path === null? '#': 'https://image.tmdb.org/t/p/w500' + element.poster_path}">
                         <div class="info">
                             <span class="title">${element.title}</span>
                             <span class="releasedate">${element.release_date}</span>
@@ -25,8 +25,8 @@ function addToTable(){
         results.forEach((element, index) => {
             $('.tv > tbody > tr').append(`
                     <td>
-                        <a href="${element.id}">
-                            <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}">
+                        <a href="tv/${element.id}">
+                            <img src="${element.poster_path === null? '#': 'https://image.tmdb.org/t/p/w500' + element.poster_path}">
                             <div class="info">
                                 <span class="title">${element.name}</span>
                                 <span class="releasedate">${element.first_air_date}</span>
@@ -40,19 +40,14 @@ function addToTable(){
 }
 searchButton.on("click", addToTable);
 searchBar.on("keyup", addToTable)
-function add(title, type){
-    fetch(`https://api.themoviedb.org/3/search/${type}?api_key=f0649916d953886dc034b0301ce8bb18&query=${title.replace(/ /g, "+")}`).then(response => response.json()).then((data) => {    
-        console.log(data.results[0]);
+
+function addmovie(id){
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=f0649916d953886dc034b0301ce8bb18`).then(response => response.json()).then((data) => {
         const option = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data.results[0])
+                body: JSON.stringify(data)
         }
-        if(type === "movie"){
-            fetch('/addm', option);
-        }
-        else{
-            fetch('/addt', option);
-        }
-    }).then(() => location.href("/"));
+        fetch('/addm', option)
+    });
 }

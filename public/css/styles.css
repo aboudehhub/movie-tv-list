@@ -549,11 +549,6 @@ a {
   background: #723f8c !important;
   transition: all 0.1s ease-in-out !important;
 }
-.list-table > tbody:first-of-type {
-  position: relative;
-  top: -191.2857px;
-  margin: 0 0 -10px;
-}
 
 [data-owner='1'] .list-table > tbody:first-of-type {
   top: -93px;
@@ -857,6 +852,7 @@ a {
   font-weight: 400;
   text-align: center !important;
   z-index: 1;
+  user-select: none;
 }
 
 .data.chapter span,
@@ -1210,4 +1206,11 @@ a {
   border: 2px solid #6d368f;
   border-bottom: none;
   border-top: none;
+}
+select{
+  background-color: #131118;
+  color: #b4b4b4;
+}
+.hidden{
+  display: none;
 }

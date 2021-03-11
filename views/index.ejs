@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="./css/styles.css">
     <title>aboude Movie Tv list List</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        .list-table > tbody:first-of-type {
+            position: relative;
+            top: -191.2857px;
+            margin: 0 0 -10px;
+        }
+    </style>
 </head>
 
 <body class="ownlist anime" data-owner="1">
     <%- include('./header'); %>
     <div id="list-container" class="list-container">
         <div id="status-menu" class="status-menu-container">
-            <div class="status-menu"><a href="" class="status-button all_anime on">All Media</a><a href=""
-                    class="status-button watching ">Currently Watching</a><a href=""
-                    class="status-button completed ">Completed</a><a href="" class="status-button onhold ">On
-                    Hold</a><a href="" class="status-button dropped ">Dropped</a><a href=""
-                    class="status-button plantowatch ">Plan
-                    to Watch</a>
+            <div class="status-menu"><a href="/" class="status-button all_anime on">All Media</a>
+                <a onclick="insertParam('cond', 'watching')" class="status-button watching ">Currently Watching</a>
+                <a onclick="insertParam('cond', 'completed')" class="status-button completed ">Completed</a>
+                <a onclick="insertParam('cond', 'on hold')" class="status-button onhold ">On Hold</a>
+                <a onclick="insertParam('cond', 'dropped')" class="status-button dropped ">Dropped</a>
+                <a onclick="insertParam('cond', 'plan to watch')" class="status-button plantowatch ">Plan to Watch</a>
                 <a href="/addMedia" class="status-button add-media">add media</a>
             </div>
         </div>
@@ -31,19 +38,18 @@
                     <tbody>
                         <tr class="list-table-header">
                             <th class="header-title status"></th>
-                            <th class="header-title image"><a class="link hover_info">Image</a></th>
-                            <th class="header-title title"><a href="" class="link sort">
-                                    Media Title
-                                </a></th>
-                            <th class="header-title score"><a href="" class="link sort">
-                                    Score
-                                </a></th>
-                            <th class="header-title type"><a href="" class="link sort">
-                                    Type
-                                </a></th>
-                            <th class="header-title progress"><a href="" class="link sort">
-                                    Progress
-                                </a></th>
+                            <th onclick="insertParam('sort', 'title')" class="header-title title">
+                                <a class="link sort">Media Title</a>
+                            </th>
+                            <th onclick="insertParam('sort', 'rating')" class="header-title score">
+                                <a class="link sort">Score</a>
+                            </th>
+                            <th onclick="insertParam('sort', 'type')" class="header-title type">
+                                <a class="link sort">Type</a>
+                            </th>
+                            <th onclick="insertParam('sort', 'ep_watched')" class="header-title progress">
+                                <a class="link sort">Progress</a>
+                            </th>
                             <th class="header-title tags">
                                 Tags
                             </th>
@@ -70,10 +76,23 @@
                                     </div>
                                 </td>
                                 <td class="data score">
-                                    <a href="#" class="link">
+                                    <a style="cursor: pointer;" onclick="changeScore(<%= i %>)" class="link">
                                         <span class="score-label">
                                             <%= data[i].rating %>
                                         </span>
+                                        <select onchange="changeRating(<%= i %>)" class="hidden">
+                                            <option value="0">-</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
                                     </a>
                                 </td>
                                 <td class="data type">
@@ -82,24 +101,24 @@
                                 <td class="data progress" style="margin: 0;">
                                     <div>
                                         <span>
-                                            <a href="#" class="link">
+                                            <a class="link watched">
                                                 <%= data[i].ep_watched %></a>
                                             <transition name="edit" style="display: none;">
                                                 <input type="text" style="width:30px;">
                                             </transition>
                                             /
                                         </span>
-                                        <span><%= data[i].ep_total %></span>
-                                        <a href="#" class="icon-add-episode">
+                                        <span class="total"><%= data[i].ep_total %></span>
+                                        <a style="cursor: pointer;" onclick="addEp(<%= i %>)" class="icon-add-episode">
                                             +
                                         </a>
                                     </div>
                                 </td>
                                 <td class="data season">
-                                    <span style="color: white;"><%= data[i].year %></span>
+                                    <span style="color: white;"><%= data[i].release_date.slice(0, 4) %></span>
                                 </td>
                                 <td class="data studio">
-                                    <span style="font-size: 12px;"><%= data[i].release_date + data[i].year %></span>
+                                    <span style="font-size: 12px;"><%= data[i].release_date %></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -109,6 +128,8 @@
             </div>
         </div>
     </div>
+    <script src="./javascript/jquery-3.5.1.js"></script>
+    <script src="./javascript/main.js"></script>
 </body>
 
 </html>

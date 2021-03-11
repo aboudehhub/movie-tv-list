@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://use.fontawesome.com/1c78e32294.js"></script>
         <script src="./javascript/jquery-3.5.1.js"></script>
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/addingcss.css">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/addingcss.css">
         <title>Add media</title>
     </head>
     <body>
@@ -17,57 +17,76 @@
         <table class="list-table">
             <%for (let i=0; i < Object.keys(media.seasons).length; i++) {%>
                 <tbody class="list-item" style="display: none;">
-                    <tr class="list-table-data">
-                        <td class="data status"></td>
-            
-                        <td class="data image">
-                            <a class="link sort">
-                                <img src=<%="https://image.tmdb.org/t/p/w500" + media.seasons[i].poster_path %> class="hover-info image">
-                            </a>
-                        </td>
-                        <td class="data title clearfix" style="text-transform: capitalize;">
-                            <%= media.name %>
-                                <div class="add-edit-more">
-                                    <span class="more">
-                                        <a href="#">Edit</a>
-                                    </span>
-                                </div>
-                        </td>
-                        <td class="data score">
-                            <a href="#" class="link">
-                                <span class="score-label">
-                                    <%= media.seasons[i].season_number %>
-                                </span>
-                            </a>
-                        </td>
-                        <td class="data type">
-                            <span class="watching" style="text-transform: uppercase;">
-                                <%= "A" %>
-                            </span>
-                        </td>
-                        <td class="data progress" style="margin: 0;">
-                            <div>
-                                <span>
-                                    <%= media.seasons[i].episode_count %>
-                                </span>
-                                <a href="#" class="icon-add-episode">
-                                    +
+                        <tr class="list-table-data">
+                            <td class="data status"></td>
+                
+                            <td class="data image">
+                                <a class="link sort">
+                                    <img src=<%="https://image.tmdb.org/t/p/w500" + media.seasons[i].poster_path %> class="hover-info image">
                                 </a>
-                            </div>
-                        </td>
-                        <td class="data season">
-                            <span style="color: white;">
-                                <%= media.seasons[i].air_date %>
-                            </span>
-                        </td>
-                        <td class="data studio">
-                            <span style="font-size: 12px;">
-                                <%= media.seasons[i].air_date %>
-                            </span>
-                        </td>
-                    </tr>
+                            </td>
+                            <td class="data title clearfix" style="text-transform: capitalize;">
+                                season
+                                <%= media.seasons[i].season_number %>
+                            </td>
+                            <td class="data score">
+                                <a href="#" class="link">
+                                    <span class="score-label">
+                                        <%= Math.floor(media.episode_run_time.reduce((a, b) => a + b) / media.episode_run_time.length) %>
+                                    </span>
+                                </a>
+                            </td>
+                            <td class="data type">
+                                <span class="watching" style="text-transform: uppercase;">
+                                    TV
+                                </span>
+                            </td>
+                            <td class="data progress" style="margin: 0;">
+                                <div>
+                                    <span>
+                                        <%= media.seasons[i].episode_count %>
+                                    </span>
+                                    <a href="#" class="icon-add-episode" onclick="addtv(<%= media.id %>, <%= media.seasons[i].season_number %>)">
+                                        +
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="data season">
+                                <span style="color: white;">
+                                    <% if (media.seasons[i].air_date) { %>
+                                        <%= media.seasons[i].air_date.slice(0, 4) %>
+                                    <% } %>
+                                </span>
+                            </td>
+                            <td class="data studio">
+                                <span style="font-size: 12px;">
+                                    <%= media.seasons[i].air_date %>
+                                </span>
+                            </td>
+                        </tr>
                 </tbody>
                 <% } %>
+                <script>
+                    function addtv(id, season){
+                        fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=f0649916d953886dc034b0301ce8bb18`).then(response => response.json()).then((data) => {
+                            let rdata = {
+                                name: data.name,
+                                status: data.status,
+                                poster_path: data.seasons[season].poster_path,
+                                episode_count: data.seasons[season].episode_count,
+                                air_date: data.seasons[season].air_date,
+                                episode_run_time: data.episode_run_time.reduce((a, b) => a + b) / data.episode_run_time.length,
+                                tagline: data.tagline
+                            }
+                            const option = {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(rdata)
+                            }
+                            fetch('/addt', option)
+                        });
+                    }
+                </script>
         </table>
     </body>
 </html>
