@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
-// express lets
+// express consts
 const app = express();
 const networkInterface = os.networkInterfaces();
 const ip = networkInterface['Wi-Fi'][1].address;
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 const apiKey = process.env.API_KEY;
 
-// mongo lets
+// mongo consts
 const Schema  = mongoose.Schema;
 const mediaSchema = new Schema({
     title:  String, 
